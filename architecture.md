@@ -1,11 +1,27 @@
 # Architecture Diagram
 
 ```mermaid
-graph TD
+%%{init: {
+  'theme': 'base',
+  'flowchart': {
+    'curve': 'basis',
+    'nodeSpacing': 70,
+    'rankSpacing': 90,
+    'diagramPadding': 20
+  },
+  'themeVariables': {
+    'primaryColor': '#e8f4fd',
+    'primaryTextColor': '#000000',
+    'primaryBorderColor': '#1565c0',
+    'lineColor': '#333333',
+    'fontSize': '14px'
+  }
+}}%%
+graph LR
     A[User Browser<br>Gradio Interface] -->|HTTP / WebSocket| B[Cloud Run Service<br>vizedu-explainer]
 
     B -->|Gemini API call| C[Vertex AI<br>Gemini 2.5-flash-image]
-    C -->|Interleaved response<br>TEXT + IMAGE| B
+    C -->|Interleaved TEXT + IMAGE| B
 
     B -->|Text-to-Speech request| D[Cloud Text-to-Speech API]
     D -->|MP3 audio| B
@@ -20,6 +36,3 @@ graph TD
         D
         E
     end
-
-    style A fill:#f9f,stroke:#333
-    style B fill:#bbf,stroke:#333
