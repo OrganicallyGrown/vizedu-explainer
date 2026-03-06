@@ -130,7 +130,7 @@ with gr.Blocks(title="VizEdu Explainer") as demo:
         gr.HTML("""
             <div class="header-card">
                 <h1>📚 VizEdu Explainer</h1>
-                <p>Transform complex topics into engaging educational stories with Gemini 3 Flash</p>
+                <p>Transform complex topics into engaging educational stories with Gemini 2.5 Flash</p>
             </div>
         """)
 
@@ -220,7 +220,7 @@ with gr.Blocks(title="VizEdu Explainer") as demo:
         with gr.Row(elem_classes="footer-text"):
             with gr.Column():
                 gr.Markdown("""
-                    **VizEdu Explainer** • Powered by **Gemini 3.1 flash-image-preview** • Multi-modal Generation • Vertex AI
+                    **VizEdu Explainer** • Powered by **Gemini-2.5-flash-image** • Multi-modal Generation • Vertex AI
                     
                     <small>Built for educational clarity and visual engagement.</small>
                 """)
