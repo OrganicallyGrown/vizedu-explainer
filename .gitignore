@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+assets/
+*.jpg
+*.mp3
+terraform/.terraform/
