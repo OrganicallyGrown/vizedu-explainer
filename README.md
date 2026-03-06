@@ -17,6 +17,17 @@ All in **one cohesive response stream** — no separate calls or post-processing
 - Fully hosted on **Google Cloud Run**  
 - Bonus: Terraform IaC files included (optional automated deployment)
 
+## Architecture Diagram
+
+The system is built entirely on Google Cloud:
+
+- Frontend: Gradio UI (hosted on Cloud Run)
+- Core AI: Gemini 2.5-flash-image via Vertex AI (interleaved text + images)
+- Voice narration: Cloud Text-to-Speech
+- Asset storage & delivery: Cloud Storage
+
+See the full horizontal diagram in [architecture.md](./architecture.md)
+
 ### Technologies Used
 - **Gemini model**: gemini-2.5-flash-image (native interleaved TEXT + IMAGE)  
 - **Framework**: Google GenAI SDK + Vertex AI  
