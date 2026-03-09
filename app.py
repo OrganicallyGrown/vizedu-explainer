@@ -87,12 +87,12 @@ footer {
 }
 """
 
-def explain(topic, age, length, style):
+def explain(topic, age, length, style, voice_choice):
     if not topic.strip():
         return "### ⚠️ Please enter a topic to begin.", None, []
     
     try:
-        result = generate_interleaved_explanation(topic, age, length, style)
+        result = generate_interleaved_explanation(topic, age, length, style, voice_choice)
         
         narration_parts = [p.strip() for p in result['narration'].split('\n\n') if p.strip()]
         images = result.get("image_urls", [])
@@ -180,6 +180,18 @@ with gr.Blocks(title="VizEdu Explainer") as demo:
                     value="fun"
                 )
                 
+                # New: Voice selection dropdown
+                voice_choice = gr.Dropdown(
+                    choices=[
+                        ("Youthful Female (Fun & Energetic)", "en-US-Neural2-F"),
+                        ("Energetic Male (Exciting & Bold)", "en-US-Neural2-D"),
+                        ("Warm Friendly Female (Gentle & Clear)", "en-US-Neural2-J")
+                    ],
+                    label="Voice Style",
+                    value="en-US-Neural2-F",  # default
+                    interactive=True
+                )
+                
                 generate_btn = gr.Button("✨ Generate Story", variant="primary", elem_id="generate-btn")
                 
                 with gr.Accordion("💡 Need inspiration?", open=False):
@@ -189,7 +201,7 @@ with gr.Blocks(title="VizEdu Explainer") as demo:
                             ["The history of the Roman Empire", "adult", "long", "serious"],
                             ["Why is the sky blue?", "8", "short", "fun"]
                         ],
-                        inputs=[topic, age, length, style]
+                        inputs=[topic, age, length, style, voice_choice]
                     )
 
             # Output Area
@@ -237,7 +249,7 @@ with gr.Blocks(title="VizEdu Explainer") as demo:
     # Generation trigger
     generate_btn.click(
         fn=explain, 
-        inputs=[topic, age, length, style], 
+        inputs=[topic, age, length, style, voice_choice], 
         outputs=[output_md, audio_out, gallery],
         api_name="explain"
     )

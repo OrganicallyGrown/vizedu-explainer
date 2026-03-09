@@ -5,19 +5,23 @@ VizEdu Explainer is an advanced multimodal AI agent that turns any topic into a 
 
 - Fluid narration text  
 - Interleaved diagrams & illustrations (native image output)  
-- Synchronized voice narration (Cloud Text-to-Speech)  
+- Synchronized, high-quality voice narration (Cloud Text-to-Speech with selectable          kid-friendly voices)  
 
 All in **one cohesive response stream** — no separate calls or post-processing for visuals.
 
 ### Features
-- Natural language input: topic + age + length + style  
-- Interleaved output: story paragraphs alternated with relevant diagrams  
-- Voiceover audio automatically generated and playable  
+- Natural language input: topic + age + length + style + **voice style**  
+- Native interleaved output: story paragraphs + diagrams appear together  
+- Three selectable Neural2 voices:  
+  - Youthful Female (Fun & Energetic) – en-US-Neural2-F  
+  - Energetic Male (Exciting & Bold) – en-US-Neural2-D  
+  - Warm Friendly Female (Gentle & Clear) – en-US-Neural2-J  
+- Handles long narrations with automatic TTS chunking & audio concatenation  
 - Assets stored in Cloud Storage with public URLs  
-- Fully hosted on **Google Cloud Run**  
-- Bonus: Terraform IaC files included (optional automated deployment)
+- Friendly error handling & quota retry logic  
+- Fully deployed on **Google Cloud Run** with optional Terraform IaC
 
-## Architecture Diagram
+## Architecture
 
 The system is built entirely on Google Cloud:
 
@@ -29,13 +33,14 @@ The system is built entirely on Google Cloud:
 See the full horizontal diagram in [architecture.md](./architecture.md)
 
 ### Technologies Used
-- **Gemini model**: gemini-2.5-flash-image (native interleaved TEXT + IMAGE)  
-- **Framework**: Google GenAI SDK + Vertex AI  
-- **Backend**: Google Cloud Run (containerized with Dockerfile)  
-- **Storage**: Cloud Storage (images & audio)  
-- **TTS**: Cloud Text-to-Speech  
-- **Frontend**: Gradio (real-time UI)  
-- **Other**: pydub (audio concatenation), Terraform (IaC bonus)
+- **Gemini model**: gemini-2.5-flash-image (Vertex AI) – native interleaved TEXT + IMAGE  
+- **Framework**: Google GenAI SDK  
+- **Frontend**: Gradio (real-time UI with voice dropdown, markdown, gallery, audio player)  
+- **Backend & Hosting**: Google Cloud Run (Dockerfile + gcloud deploy)  
+- **Storage**: Google Cloud Storage (images & audio)  
+- **Text-to-Speech**: Google Cloud Text-to-Speech (Neural2 voices + pydub/ffmpeg chunking)  
+- **Other**: tenacity (quota retry), python-dotenv, Pillow  
+- **Deployment**: gcloud CLI + optional Terraform IaC
 
 ### Local Spin-up (2 commands)
 ```bash
